@@ -1082,6 +1082,9 @@ int performRtspHandshake(PSERVER_INFORMATION serverInfo) {
                 NegotiatedVideoFormat = VIDEO_FORMAT_H265;
             }
         }
+        else if ((StreamConfig.supportedVideoFormats & VIDEO_FORMAT_MASK_MPEG)){
+            NegotiatedVideoFormat = VIDEO_FORMAT_MPEG2;
+        }
         else {
             NegotiatedVideoFormat = VIDEO_FORMAT_H264;
 

@@ -412,7 +412,6 @@ static PSDP_OPTION getAttributesList(char*urlSafeAddr) {
 
     if (AppVersionQuad[0] >= 4) {
         unsigned char slicesPerFrame;
-
         // Use slicing for increased performance on some decoders
         slicesPerFrame = (unsigned char)(VideoCallbacks.capabilities >> 24);
         if (slicesPerFrame == 0) {
@@ -436,6 +435,10 @@ static PSDP_OPTION getAttributesList(char*urlSafeAddr) {
                 Limelog("Disabling split encode for HEVC on older GFE version");
                 err |= addAttributeString(&optionHead, "x-nv-video[0].encoderFeatureSetting", "0");
             }
+        }
+        else if (NegotiatedVideoFormat & VIDEO_FORMAT_MASK_MPEG) {
+            err |= addAttributeString(&optionHead, "x-nv-clientSupportHevc", "0");
+            err |= addAttributeString(&optionHead, "x-nv-vqos[0].bitStreamFormat", "3");
         }
         else {
             err |= addAttributeString(&optionHead, "x-nv-clientSupportHevc", "0");
@@ -525,7 +528,6 @@ static PSDP_OPTION getAttributesList(char*urlSafeAddr) {
         snprintf(payloadStr, sizeof(payloadStr), "%d", (StreamConfig.colorSpace << 1) | StreamConfig.colorRange);
         err |= addAttributeString(&optionHead, "x-nv-video[0].encoderCscMode", payloadStr);
     }
-
     if (err == 0) {
         return optionHead;
     }

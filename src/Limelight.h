@@ -219,6 +219,7 @@ typedef struct _DECODE_UNIT {
 // Passed in StreamConfiguration.supportedVideoFormats to specify supported codecs
 // and to DecoderRendererSetup() to specify selected codec.
 #define VIDEO_FORMAT_H264        0x0001 // H.264 High Profile
+#define VIDEO_FORMAT_MPEG2       0x0010 // MPEG2 low Profile
 #define VIDEO_FORMAT_H265        0x0100 // HEVC Main Profile
 #define VIDEO_FORMAT_H265_MAIN10 0x0200 // HEVC Main10 Profile
 #define VIDEO_FORMAT_AV1_MAIN8   0x1000 // AV1 Main 8-bit profile
@@ -226,6 +227,7 @@ typedef struct _DECODE_UNIT {
 
 // Masks for clients to use to match video codecs without profile-specific details.
 #define VIDEO_FORMAT_MASK_H264  0x000F
+#define VIDEO_FORMAT_MASK_MPEG  0x00F0
 #define VIDEO_FORMAT_MASK_H265  0x0F00
 #define VIDEO_FORMAT_MASK_AV1   0xF000
 #define VIDEO_FORMAT_MASK_10BIT 0x2200
